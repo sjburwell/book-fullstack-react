@@ -29,7 +29,7 @@ class ProductList extends React.Component {
           <div className='middle aligned content'>
             <div className='header'>
                 <a>
-                    <i className='large carat up icon' />
+                    <i className='large caret up icon' /> 
                 </a>
                 {this.props.votes}
             </div>
