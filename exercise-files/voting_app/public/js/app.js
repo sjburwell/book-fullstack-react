@@ -7,7 +7,7 @@ class ProductList extends React.Component {
     };
   }
 
-  // here, the Seed.products are filled upon componentDidMount
+  // here, the state.products are filled upon componentDidMount
   componentDidMount() {
     this.setState({ products: Seed.products });
   }
