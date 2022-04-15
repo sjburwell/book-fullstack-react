@@ -1,12 +1,13 @@
 
 class ProductList extends React.Component {
+
+  // function to be called when a product is upvoted
   handleProductUpVote(productId) {
     console.log(productId + ' was upvoted.');
   }
 
   render() {
-    // addition of sort will be mutable, which can be dangerous but explained later.
-    // sort 
+    // addition of sort will be mutable, which can be dangerous but explained later
     const products = Seed.products.sort((a, b) => b.votes - a.votes);
     const productComponents = products.map((product) => (
       <Product 
@@ -32,27 +33,29 @@ class ProductList extends React.Component {
 
 class Product extends React.Component {
   
-  // defines the added function 
+  //  
   constructor(props) {
+    // by calling super(), we are calling the constructor of the parent class
     super(props);
+    // this is how we bind the handleUpVote function to the component (but it's not defined here??)
     this.handleUpVote = this.handleUpVote.bind(this);
   }
 
-  // defines the added function
+  // on "click," React invokes this function
+  // handleUpVote invokes the props.onVote, which lives inside the Parent and calls console.log()
   handleUpVote() {
     this.props.onVote(this.props.id);
   }
 
   render() {
     return (
-        // must use className instead of class because class is a reserved word in javascript
       <div className='item'>
         <div className='image'>
           <img src={this.props.productImageUrl} />
         </div>
         <div className='middle aligned content'>
           <div className='header'>
-              <a onClick={this.handleUpVote}>
+              <a onClick={this.handleUpVote}> 
                   <i className='large caret up icon' /> 
               </a>
               {this.props.votes}
