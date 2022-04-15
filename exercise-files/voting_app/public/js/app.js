@@ -5,6 +5,9 @@ class ProductList extends React.Component {
     this.state = {
       products: [],
     };
+
+    // bind the handleProductUpVote function to the ProductList component
+    this.handleProductUpVote = this.handleProductUpVote.bind(this);
   }
 
   // here, the state.products are filled upon componentDidMount
@@ -14,7 +17,18 @@ class ProductList extends React.Component {
 
   // function to be called when a product is upvoted
   handleProductUpVote(productId) {
-    console.log(productId + ' was upvoted.');
+    // find the product with the given id
+    const nextProducts = this.state.products.map((product) => {
+      if (product.id === productId) {
+        return Object.assign({}, product, {
+          votes: product.votes + 1,
+        });
+      } else {
+        return product;
+      }
+    });
+    // set the state to the new products array
+    this.setState({ products: nextProducts });
   }
 
   render() {
