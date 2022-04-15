@@ -1,5 +1,16 @@
 
 class ProductList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+    };
+  }
+
+  // here, the Seed.products are filled upon componentDidMount
+  componentDidMount() {
+    this.setState({ products: Seed.products });
+  }
 
   // function to be called when a product is upvoted
   handleProductUpVote(productId) {
@@ -8,7 +19,10 @@ class ProductList extends React.Component {
 
   render() {
     // addition of sort will be mutable, which can be dangerous but explained later
-    const products = Seed.products.sort((a, b) => b.votes - a.votes);
+    // sort by votes, descending - but here, no Seed data is available, so need to setState!
+    const products = this.state.products.sort((a, b) => (
+      b.votes - a.votes
+    ));
     const productComponents = products.map((product) => (
       <Product 
           id={product.id}
