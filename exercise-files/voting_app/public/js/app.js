@@ -1,14 +1,10 @@
 
 class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [],
-    };
-
-    // bind the handleProductUpVote function to the ProductList component
-    this.handleProductUpVote = this.handleProductUpVote.bind(this);
-  }
+  
+  // Can drop constructor() because converting below to arrow functions, and using transform-class-properties
+  state = {
+    products: [],
+  };
 
   // here, the state.products are filled upon componentDidMount
   componentDidMount() {
@@ -16,7 +12,7 @@ class ProductList extends React.Component {
   }
 
   // function to be called when a product is upvoted
-  handleProductUpVote(productId) {
+  handleProductUpVote = (productId) => {
     // find the product with the given id
     const nextProducts = this.state.products.map((product) => {
       if (product.id === productId) {
@@ -61,17 +57,12 @@ class ProductList extends React.Component {
 
 class Product extends React.Component {
   
-  //  
-  constructor(props) {
-    // by calling super(), we are calling the constructor of the parent class
-    super(props);
-    // this is how we bind the handleUpVote function to the component (but it's not defined here??)
-    this.handleUpVote = this.handleUpVote.bind(this);
-  }
+  // can drop constructor(), because converting below to arrow functions, and using transform-class-properties 
 
   // on "click," React invokes this function
   // handleUpVote invokes the props.onVote, which lives inside the Parent and calls console.log()
-  handleUpVote() {
+  // having transform-class-properties and the below ARROW function, the above constructor() is not needed
+  handleUpVote = () => {
     this.props.onVote(this.props.id);
   }
 
